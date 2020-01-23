@@ -46,6 +46,23 @@ public class CountryEntity{
     public CountryEntity() {
     }
 
+    public CountryEntity(String code, String name, String continent, String region, float surfaceArea, Short indepYear, int population, Float lifeExpectancy, BigDecimal gnp, BigDecimal gnpOld, String localName, String governmentForm, String headOfState, String code2) {
+        this.code = code;
+        this.name = name;
+        this.continent = continent;
+        this.region = region;
+        this.surfaceArea = surfaceArea;
+        this.indepYear = indepYear;
+        this.population = population;
+        this.lifeExpectancy = lifeExpectancy;
+        this.gnp = gnp;
+        this.gnpOld = gnpOld;
+        this.localName = localName;
+        this.governmentForm = governmentForm;
+        this.headOfState = headOfState;
+        this.code2 = code2;
+    }
+
     private String getCode() {
         return code;
     }
@@ -125,8 +142,7 @@ public class CountryEntity{
                 Objects.equals(getLocalName(), that.getLocalName()) &&
                 Objects.equals(getGovernmentForm(), that.getGovernmentForm()) &&
                 Objects.equals(getHeadOfState(), that.getHeadOfState()) &&
-                getCode2().equals(that.getCode2()) &&
-                getCapital().equals(that.getCapital());
+                getCode2().equals(that.getCode2());
     }
 
     @Override

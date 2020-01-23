@@ -23,6 +23,12 @@ public class CountryLanguageEntity {
     public CountryLanguageEntity() {
     }
 
+    public CountryLanguageEntity(String language, boolean isOfficial, float percentage) {
+        this.language = language;
+        this.isOfficial = isOfficial;
+        this.percentage = percentage;
+    }
+
     private CountryEntity getCode() {
         return code;
     }
@@ -46,7 +52,6 @@ public class CountryLanguageEntity {
         CountryLanguageEntity that = (CountryLanguageEntity) o;
         return isOfficial() == that.isOfficial() &&
                 Float.compare(that.getPercentage(), getPercentage()) == 0 &&
-                getCode().equals(that.getCode()) &&
                 getLanguage().equals(that.getLanguage());
     }
 

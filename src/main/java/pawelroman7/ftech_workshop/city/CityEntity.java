@@ -26,6 +26,13 @@ public class CityEntity implements Serializable {
     public CityEntity() {
     }
 
+    public CityEntity(int id, String name, String district, int population) {
+        this.id = id;
+        this.name = name;
+        this.district = district;
+        this.population = population;
+    }
+
     private int getId() {
         return id;
     }
@@ -54,8 +61,7 @@ public class CityEntity implements Serializable {
         return getId() == that.getId() &&
                 getPopulation() == that.getPopulation() &&
                 getName().equals(that.getName()) &&
-                getDistrict().equals(that.getDistrict()) &&
-                Objects.equals(getCountry(), that.getCountry());
+                getDistrict().equals(that.getDistrict());
     }
 
     @Override
