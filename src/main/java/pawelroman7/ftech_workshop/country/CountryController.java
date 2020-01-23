@@ -1,38 +1,35 @@
 package pawelroman7.ftech_workshop.country;
 
-import org.modelmapper.ModelMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pawelroman7.ftech_workshop.language.CountryLanguageService;
 
 @Controller
 public class CountryController {
     private final CountryService countryService;
     private final CountryLanguageService countryLanguageService;
-    private final ModelMapper modelMapper;
+    private final ObjectMapper objectMapper;
 
-    public CountryController(CountryService countryService, CountryLanguageService countryLanguageService, ModelMapper modelMapper) {
+    public CountryController(CountryService countryService, CountryLanguageService countryLanguageService, ObjectMapper objectMapper) {
         this.countryService = countryService;
         this.countryLanguageService = countryLanguageService;
-        this.modelMapper = modelMapper;
+        this.objectMapper = objectMapper;
     }
 
-
     @GetMapping("/{code}")
-    public String getCountry(@PathVariable (name = "code") String code, Model model){
-        CountryDTO countryDTO = modelMapper.map(countryService.getCountryByCode(code), CountryDTO.class);
-        model.addAttribute("countryDTO", countryDTO);
-        model.addAttribute("countryLanguage", countryLanguageService.getOfficialCountryLangByCountryCode(code));
-        return "";
-        //TODO: Controller and view, add Jackson lib
+    @ResponseBody
+    public String getCountry(@PathVariable (name = "code") String code) throws JsonProcessingException {
+        CountryDTO countryDTO = new CountryDTO(countryService.getCountryByCode(code), countryLanguageService.getCountryLanguagesByCountryCode(code));
+        return objectMapper.writeValueAsString(countryDTO);
     }
 
     @PostMapping("/")
     public String postCountry(){
-
         return "";
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CountryLanguageRepository extends JpaRepository<CountryLanguageEntity, String> {
 
-    @Query("SELECT l.language FROM CountryLanguageEntity l JOIN FETCH CountryEntity c WHERE c.code = ?1 AND l.isOfficial = true")
-    String getOfficialCountryLanguageByCountryCode(String code);
+    @Query(value = "SELECT * FROM country_language JOIN country c on country_language.country_code = c.code WHERE is_official = true AND country_code = ?1 ORDER BY percentage DESC LIMIT 1", nativeQuery = true)
+    CountryLanguageEntity getOfficialCountryLanguageByCountryCode(String code);
+
+
 }

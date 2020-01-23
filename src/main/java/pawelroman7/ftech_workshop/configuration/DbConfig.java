@@ -15,8 +15,8 @@ public class DbConfig {
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/world-db");
         config.setUsername("world");
         config.setPassword("world123");
-        config.setMaximumPoolSize(2);
-        config.setDriverClassName("org.postgresql.ds.PGSimpleDataSource");
+        config.setMaximumPoolSize(5);
+        config.setDriverClassName("org.postgresql.Driver");
         return new HikariDataSource(config);
     }
 }

@@ -1,10 +1,8 @@
 package pawelroman7.ftech_workshop.country;
 
-import java.util.function.Supplier;
+class CountryNotFoundException extends RuntimeException {
 
-public class CountryNotFoundException extends RuntimeException {
-
-    public CountryNotFoundException(){
-        super("message");
+    CountryNotFoundException(){
+        super("INVALID_COUNTRY_CODE");
     }
 }

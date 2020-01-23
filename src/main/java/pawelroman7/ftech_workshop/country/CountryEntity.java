@@ -5,164 +5,107 @@ import pawelroman7.ftech_workshop.city.CityEntity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "country", schema = "public", catalog = "world-db")
-public class CountryEntity {
+public class CountryEntity{
 
     @Id
-    @Column(name = "code")
+    @Column(name = "code", columnDefinition = "character(3) NOT NULL")
     private String code;
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "text NOT NULL")
     private String name;
-    @Column(name = "continent")
+    @Column(name = "continent", columnDefinition = "text NOT NULL")
     private String continent;
-    @Column(name = "region")
+    @Column(name = "region", columnDefinition = "text NOT NULL")
     private String region;
-    @Column(name = "surface_area")
+    @Column(name = "surface_area", columnDefinition = "real NOT NULL")
     private float surfaceArea;
-    @Column(name = "indep_year")
+    @Column(name = "indep_year", columnDefinition = "smallint")
     private Short indepYear;
-    @Column(name = "population")
+    @Column(name = "population", columnDefinition = "integer NOT NULL")
     private int population;
-    @Column(name = "life_expectancy")
+    @Column(name = "life_expectancy", columnDefinition = "real")
     private Float lifeExpectancy;
-    @Column(name = "gnp")
+    @Column(name = "gnp", columnDefinition = "numeric(10,2)")
     private BigDecimal gnp;
-    @Column(name = "gnp_old")
+    @Column(name = "gnp_old", columnDefinition = "numeric(10,2)")
     private BigDecimal gnpOld;
-    @Column(name = "local_name")
+    @Column(name = "local_name", columnDefinition = "text NOT NULL")
     private String localName;
-    @Column(name = "government_form")
+    @Column(name = "government_form", columnDefinition = "text NOT NULL")
     private String governmentForm;
-    @Column(name = "head_of_state")
+    @Column(name = "head_of_state", columnDefinition = "text")
     private String headOfState;
-    @Column(name = "code2")
+    @Column(name = "code2", columnDefinition = "character(2) NOT NULL")
     private String code2;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "capital")
     private CityEntity capital;
 
-    public String getCode() {
+    public CountryEntity() {
+    }
+
+    private String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getContinent() {
+    String getContinent() {
         return continent;
     }
 
-    public void setContinent(String continent) {
-        this.continent = continent;
-    }
-
-    public String getRegion() {
+    private String getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public float getSurfaceArea() {
+    private float getSurfaceArea() {
         return surfaceArea;
     }
 
-    public void setSurfaceArea(float surfaceArea) {
-        this.surfaceArea = surfaceArea;
-    }
-
-    public Short getIndepYear() {
+    private Short getIndepYear() {
         return indepYear;
     }
 
-    public void setIndepYear(Short indepYear) {
-        this.indepYear = indepYear;
-    }
-
-    public int getPopulation() {
+    int getPopulation() {
         return population;
     }
 
-    public void setPopulation(int population) {
-        this.population = population;
-    }
-
-    public Float getLifeExpectancy() {
+    Float getLifeExpectancy() {
         return lifeExpectancy;
     }
 
-    public void setLifeExpectancy(Float lifeExpectancy) {
-        this.lifeExpectancy = lifeExpectancy;
-    }
-
-    public BigDecimal getGnp() {
+    private BigDecimal getGnp() {
         return gnp;
     }
 
-    public void setGnp(BigDecimal gnp) {
-        this.gnp = gnp;
-    }
-
-    public BigDecimal getGnpOld() {
+    private BigDecimal getGnpOld() {
         return gnpOld;
     }
 
-    public void setGnpOld(BigDecimal gnpOld) {
-        this.gnpOld = gnpOld;
-    }
-
-    public String getLocalName() {
+    private String getLocalName() {
         return localName;
     }
 
-    public void setLocalName(String localName) {
-        this.localName = localName;
-    }
-
-    public String getGovernmentForm() {
+    private String getGovernmentForm() {
         return governmentForm;
     }
 
-    public void setGovernmentForm(String governmentForm) {
-        this.governmentForm = governmentForm;
-    }
-
-    public String getHeadOfState() {
+    private String getHeadOfState() {
         return headOfState;
     }
 
-    public void setHeadOfState(String headOfState) {
-        this.headOfState = headOfState;
-    }
-
-    public String getCode2() {
+    private String getCode2() {
         return code2;
     }
 
-    public void setCode2(String code2) {
-        this.code2 = code2;
-    }
-
-    public CityEntity getCapital() {
+    private CityEntity getCapital() {
         return capital;
     }
 
-    public void setCapital(CityEntity capital) {
-        this.capital = capital;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -188,6 +131,20 @@ public class CountryEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCode(), getName(), getContinent(), getRegion(), getSurfaceArea(), getIndepYear(), getPopulation(), getLifeExpectancy(), getGnp(), getGnpOld(), getLocalName(), getGovernmentForm(), getHeadOfState(), getCode2(), getCapital());
+        return Objects.hash(getCode(),
+                getName(),
+                getContinent(),
+                getRegion(),
+                getSurfaceArea(),
+                getIndepYear(),
+                getPopulation(),
+                getLifeExpectancy(),
+                getGnp(),
+                getGnpOld(),
+                getLocalName(),
+                getGovernmentForm(),
+                getHeadOfState(),
+                getCode2(),
+                getCapital());
     }
 }

@@ -3,63 +3,47 @@ package pawelroman7.ftech_workshop.city;
 import pawelroman7.ftech_workshop.country.CountryEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "city", schema = "public", catalog = "world-db")
-public class CityEntity {
+public class CityEntity implements Serializable {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", columnDefinition = "integer NOT NULL")
     private int id;
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "text NOT NULL")
     private String name;
-    @Column(name = "district")
+    @Column(name = "district", columnDefinition = "text NOT NULL")
     private String district;
-    @Column(name = "population")
+    @Column(name = "population", columnDefinition = "integer NOT NULL")
     private int population;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_code")
     private CountryEntity country;
 
-    public int getId() {
+    public CityEntity() {
+    }
+
+    private int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    private String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDistrict() {
+    private String getDistrict() {
         return district;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public int getPopulation() {
+    private int getPopulation() {
         return population;
-    }
-
-    public void setPopulation(int population) {
-        this.population = population;
     }
 
     public CountryEntity getCountry() {
         return country;
-    }
-
-    public void setCountry(CountryEntity country) {
-        this.country = country;
     }
 
     @Override
@@ -76,6 +60,9 @@ public class CityEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDistrict(), getPopulation());
+        return Objects.hash(getId(),
+                getName(),
+                getDistrict(),
+                getPopulation());
     }
 }

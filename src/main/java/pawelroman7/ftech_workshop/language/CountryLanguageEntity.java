@@ -9,47 +9,34 @@ import java.util.Objects;
 @Table(name = "country_language", schema = "public", catalog = "world-db")
 public class CountryLanguageEntity {
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country_code")
+    private CountryEntity code;
     @Id
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "country_code")
-    private CountryEntity country;
-    @Column(name = "language")
+    @Column(name = "language", columnDefinition = "text NOT NULL")
     private String language;
-    @Column(name = "is_official")
+    @Column(name = "is_official", columnDefinition = "boolean NOT NULL")
     private boolean isOfficial;
-    @Column(name = "percentage")
+    @Column(name = "percentage", columnDefinition = "real NOT NULL")
     private float percentage;
 
-    public CountryEntity getCountry() {
-        return country;
+    public CountryLanguageEntity() {
     }
 
-    public void setCountry(CountryEntity country) {
-        this.country = country;
+    private CountryEntity getCode() {
+        return code;
     }
 
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public boolean isOfficial() {
+    private boolean isOfficial() {
         return isOfficial;
     }
 
-    public void setOfficial(boolean official) {
-        isOfficial = official;
-    }
-
-    public float getPercentage() {
+    private float getPercentage() {
         return percentage;
-    }
-
-    public void setPercentage(float percentage) {
-        this.percentage = percentage;
     }
 
     @Override
@@ -59,12 +46,20 @@ public class CountryLanguageEntity {
         CountryLanguageEntity that = (CountryLanguageEntity) o;
         return isOfficial() == that.isOfficial() &&
                 Float.compare(that.getPercentage(), getPercentage()) == 0 &&
-                getCountry().equals(that.getCountry()) &&
+                getCode().equals(that.getCode()) &&
                 getLanguage().equals(that.getLanguage());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCountry(), getLanguage(), isOfficial(), getPercentage());
+        return Objects.hash(getCode(),
+                getLanguage(),
+                isOfficial(),
+                getPercentage());
+    }
+
+    @Override
+    public String toString() {
+        return language;
     }
 }

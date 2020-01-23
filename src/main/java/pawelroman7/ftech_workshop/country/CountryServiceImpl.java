@@ -1,9 +1,13 @@
 package pawelroman7.ftech_workshop.country;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.stereotype.Service;
+import pawelroman7.ftech_workshop.configuration.DbConnectionException;
 
-import java.sql.SQLException;
+import javax.transaction.Transactional;
 
+@Service
+@Transactional
 public class CountryServiceImpl implements CountryService {
 
     private final CountryRepository countryRepository;
@@ -16,15 +20,11 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public CountryEntity getCountryByCode(String code) {
-        try {
-            dataSource.getConnection();
-        } catch (SQLException e) {
-            e = new SQLException("INTERNAL_ERROR");
-            e.printStackTrace();
+        if (dataSource.isClosed()){
+            throw new DbConnectionException();
+        } else {
+            return countryRepository.findByCode(code).orElseThrow(CountryNotFoundException::new);
         }
-        return countryRepository.findByCountryCode(code)
-                .orElseThrow(CountryNotFoundException::new);
-
     }
 }
 

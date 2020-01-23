@@ -1,5 +1,11 @@
 package pawelroman7.ftech_workshop.language;
 
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
 public class CountryLanguageServiceImpl implements CountryLanguageService {
 
     private final CountryLanguageRepository countryLanguageRepository;
@@ -9,7 +15,7 @@ public class CountryLanguageServiceImpl implements CountryLanguageService {
     }
 
     @Override
-    public String getOfficialCountryLangByCountryCode(String code) {
+    public CountryLanguageEntity getCountryLanguagesByCountryCode(String code) {
         return countryLanguageRepository.getOfficialCountryLanguageByCountryCode(code);
     }
 }
